@@ -3,9 +3,12 @@
 #include <iomanip>
 #include "funcline.h"
 #include "funcfastosc.h"
+
 #include "funcarctan.h"
 #include <cassert>
 #include <cmath>
+
+#include "funcmodul.h"
 
 int main() {
   std::cout << "Func test example" << std::endl;
@@ -24,7 +27,7 @@ int main() {
   }
       std::cout << "\n--- Testing FuncFastOsc ---" << std::endl;
     // По условию: a = 1, b = 1
-    std::vector<double> k_osc = {1.0, 1.0}; 
+    std::vector<double> k_osc = {1.0, 1.0};
     FuncFastOsc fastOsc(k_osc);
 
     std::cout << "Manual mode (FuncFastOsc)" << std::endl;
@@ -40,6 +43,7 @@ int main() {
     for(size_t i = 0; i < res_osc.size(); ++i){
         std::cout << "y(" << std::setw(4) << res_osc[i].first << ") = " << res_osc[i].second << std::endl;
     }
+
 
 
     // Тестирование функции арктангенса
@@ -75,5 +79,30 @@ int main() {
     }
 
     std::cout << "FuncArctan tests passed!" << std::endl;
+
+    std::cout << "\n--- Testing FuncModul ---" << std::endl;
+
+    // По условию: a = 1
+    // Формула: y = abs(a * x)
+    std::vector<double> k_modul = {1.0};
+    FuncModul modul(k_modul);
+
+    std::cout << "Manual mode (FuncModul)" << std::endl;
+
+    // Проверим значения для V-образного графика
+    for(double x = -3.0; x <= 3.0; x += 0.5){
+        std::cout << "y(" << std::setw(4) << x << ") = " << modul.calc(x) << std::endl;
+    }
+
+    std::cout << "All array mode (FuncModul)" << std::endl;
+
+    // Шаг 0.5
+    auto res_modul = modul.calcAll(-3.0, 0.5, 3.0);
+
+    for(size_t i = 0; i < res_modul.size(); ++i){
+        std::cout << "y(" << std::setw(4) << res_modul[i].first << ") = " << res_modul[i].second << std::endl;
+    }
+
+
   return 0;
 }

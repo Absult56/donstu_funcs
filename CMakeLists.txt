@@ -11,6 +11,7 @@ add_executable(math_funcs main.cpp
     funcline.h
     funcfastosc.h
     funcarctan.h
+    funcmodul.h
 )
 
 include(GNUInstallDirs)
